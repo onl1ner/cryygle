@@ -1,0 +1,26 @@
+input.search[type="text"] {
+	padding: 16px;
+	font-size: 20px;
+	float: left;
+	width: 100%;
+	background: #F2F2F7;
+	border-radius: 16px;
+	border-width: 0px;
+	font-family: 'Source Sans Pro', sans-serif;
+	margin-right: 16px;
+}
+
+button.search[type="submit"] {
+	float: left;
+	width: 100px;
+	padding: 12px;
+	background: #4285F4;
+	font-size: 17px;
+	border-radius: 16px;
+	border-width: 0px;
+	cursor: pointer;
+}
+
+button.search:hover {
+	background: #609CFF;
+}

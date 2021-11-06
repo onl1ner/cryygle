@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' type='text/css'>
+    <link rel="stylesheet" href="/static/index.css">
+</head>
+
+<body>
+    <div style="display: flex;flex-direction: column;align-items: center;">
+        <img src="/static/img/logo.svg" alt="logo" style="padding-top: 32px;padding-bottom: 16px;margin-bottom: 16px;">
+
+        <form method="GET" style="display: flex;flex-direction: row;justify-content: center;align-items: center;width: 800px">
+            <input class="search" type="text" name="q" placeholder="Enter cryptocurrency name..." value={{ query }}>
+            <button class="search" type="submit">
+                <img src="/static/img/magnifying-glass.svg" alt="search">
+            </button>
+        </form>
+
+        {% for item in data %}
+        <div style="display: block;">
+            <div>
+                <span>
+                    item['paragraph']
+                </span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>
