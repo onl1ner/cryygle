@@ -5,7 +5,7 @@ class Scraper:
     def __init__(self):
         self.base_url = 'https://google.com/search'
 
-    def __extract_html(self, crypto_name, page_limit):
+    async def __extract_html(self, crypto_name, page_limit):
         params = {
             'q': 'site:coinmarketcap.com %s' % crypto_name,
             'hl': 'ru-RU',
@@ -15,7 +15,7 @@ class Scraper:
         }
 
         extracter = HTMLExtracter(self.base_url, params)
-        return extracter.extract()
+        return await extracter.extract()
 
     def __scrap_urls(self, div):
         urls = div.find_all('a', {'class': 'WlydOe'})
@@ -29,10 +29,10 @@ class Scraper:
         paragraphs = div.find_all('div', {'class': 'GI74Re nDgy9d'})
         return [paragraph.text for paragraph in paragraphs]
 
-    def scrap(self, crypto_name, page_limit):
-        html = self.__extract_html(crypto_name, page_limit)
+    async def scrap(self, crypto_name, page_limit):
+        html = await self.__extract_html(crypto_name, page_limit)
         soup = BeautifulSoup(html, 'html.parser')
-
+        
         raw_news = soup.find('div', {'id': 'rso'})
 
         urls = self.__scrap_urls(raw_news)

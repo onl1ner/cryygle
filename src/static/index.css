@@ -24,3 +24,10 @@ button.search[type="submit"] {
 button.search:hover {
 	background: #609CFF;
 }
+
+div.result {
+	display: block;
+	text-align: left;
+	width: 800px;
+	font-family: 'Source Sans Pro', sans-serif;
+}
