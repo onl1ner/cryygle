@@ -1,5 +1,3 @@
-import asyncio
-
 from flask import Flask, render_template, request, redirect
 from utils.scraper import Scraper
 
@@ -9,7 +7,7 @@ async def scrap(query):
     scraper = Scraper()
     return await scraper.scrap(query, 100)
 
-@app.route('/search', methods=['GET'])
+@app.route('/coin', methods=['GET'])
 async def search():
     query = request.args.get('q')
 

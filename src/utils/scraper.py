@@ -35,6 +35,9 @@ class Scraper:
         
         raw_news = soup.find('div', {'id': 'rso'})
 
+        if not raw_news:
+            return []
+        
         urls = self.__scrap_urls(raw_news)
         headings = self.__scrap_headings(raw_news)
         paragraphs = self.__scrap_paragraphs(raw_news)
