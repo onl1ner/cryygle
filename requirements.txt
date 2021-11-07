@@ -1,0 +1,6 @@
+Flask==2.0.2
+requests_html==0.10.0
+Flask_SQLAlchemy==2.5.1
+beautifulsoup4==4.10.0
+pyppeteer==0.2.6
+python-dotenv==0.19.1
