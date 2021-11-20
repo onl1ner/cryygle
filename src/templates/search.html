@@ -8,10 +8,10 @@
 </head>
 
 <body>
-    <div style="display: flex;flex-direction: column;align-items: center;">
+    <div style="display: flex;flex-direction: column;align-items: center;padding-bottom: 32px;">
         <img src="/static/img/logo.svg" alt="logo" style="padding-top: 32px;padding-bottom: 16px;margin-bottom: 16px;">
 
-        <form method="GET" style="display: flex;flex-direction: row;justify-content: center;align-items: center;width: 800px">
+        <form method="GET" style="display: flex;flex-direction: row;justify-content: center;align-items: center;width: 800px;margin-bottom: 16px">
             <input class="search" type="text" name="q" placeholder="Enter cryptocurrency name..." value={{ query }}>
             <button class="search" type="submit">
                 <img src="/static/img/magnifying-glass.svg" alt="search">
@@ -21,11 +21,17 @@
         {% if data|length %}
             {% for item in data %}
                 <div class="result">
-                    <a target="_blank" href={{ item['url'] }}>
-                        <h3 style="display: inline-block;line-height: 1.3;margin-bottom: 3px;">
-                            {{ item['heading'] }}
-                        </h3>
-                    </a>
+                    <div style="display: flex;flex-flow: row nowrap;min-height: 20px;align-items: stretch;width: 800px">
+                        <a class="header" target="_blank" href={{ item['url'] }}>
+                            <div>
+                                {{ item['heading'] }}
+                            </div>
+                        </a>
+
+                        <button class="summary">
+                            <img style="vertical-align: sub;" src="/static/img/info.svg" alt="summary">
+                        </button>
+                    </div>
                     <div>
                         <span>
                             {{ item['paragraph'] }}
