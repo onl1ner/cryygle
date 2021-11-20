@@ -21,7 +21,7 @@
         {% if data|length %}
             {% for item in data %}
                 <div class="result">
-                    <a href={{ item['url'] }}>
+                    <a target="_blank" href={{ item['url'] }}>
                         <h3 style="display: inline-block;line-height: 1.3;margin-bottom: 3px;">
                             {{ item['heading'] }}
                         </h3>

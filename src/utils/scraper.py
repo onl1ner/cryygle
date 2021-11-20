@@ -1,40 +1,34 @@
 from bs4 import BeautifulSoup
 from .extracter import HTMLExtracter
 
-class Scraper:
+class CryptoScraper:
     def __init__(self):
-        self.base_url = 'https://google.com/search'
+        self.base_url = 'https://www.coingecko.com/en/coins/%s/news'
 
-    async def __extract_html(self, crypto_name, page_limit):
-        params = {
-            'q': 'site:coinmarketcap.com %s' % crypto_name,
-            'hl': 'ru-RU',
-            'source': 'lnms',
-            'tbm': 'nws',
-            'num': page_limit
-        }
+    async def __extract_html(self, crypto_name):
+        url = self.base_url % crypto_name.lower()
+        extracter = HTMLExtracter(url, params={})
 
-        extracter = HTMLExtracter(self.base_url, params)
         return await extracter.extract()
 
     def __scrap_urls(self, div):
-        urls = div.find_all('a', {'class': 'WlydOe'})
-        return [url['href'] for url in urls]
+        headers = div.find_all('header')
+        return [header.find('a')['href'] for header in headers]
 
     def __scrap_headings(self, div):
-        headings = div.find_all('div', {'role': 'heading'})
-        return [heading.text for heading in headings]
+        headers = div.find_all('header')
+        return [header.find('a').text for header in headers]
 
     def __scrap_paragraphs(self, div):
-        paragraphs = div.find_all('div', {'class': 'GI74Re nDgy9d'})
+        paragraphs = div.find_all('div', {'class': 'post-body'})
         return [paragraph.text for paragraph in paragraphs]
 
-    async def scrap(self, crypto_name, page_limit):
-        html = await self.__extract_html(crypto_name, page_limit)
+    async def scrap(self, crypto_name):
+        html = await self.__extract_html(crypto_name)
         soup = BeautifulSoup(html, 'html.parser')
-        
-        raw_news = soup.find('div', {'id': 'rso'})
 
+        raw_news = soup.find('div', {'id': 'news'})
+        
         if not raw_news:
             return []
         
@@ -44,7 +38,7 @@ class Scraper:
 
         scrapped_news = []
 
-        for index in range(page_limit):
+        for index in range(10):
             url = urls[index]
             heading = headings[index]
             paragraph = paragraphs[index]

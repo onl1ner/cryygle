@@ -31,7 +31,7 @@ class HTMLExtracter:
             self.base_url, headers=self.headers, params=self.params
         )
 
-        await response.html.arender()
+        await response.html.arender(timeout = 20)
 
         return response.html.raw_html
         

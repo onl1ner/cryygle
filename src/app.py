@@ -3,7 +3,7 @@ import dotenv
 
 from flask import Flask, request, render_template
 
-from utils.scraper import Scraper
+from utils.scraper import CryptoScraper
 from utils.database import db
 from utils.summarizer import Summarizer
 
@@ -21,8 +21,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db.init_app(app)
 
 async def scrap(query):
-    scraper = Scraper()
-    results = await scraper.scrap(query, 100)
+    scraper = CryptoScraper()
+    results = await scraper.scrap(query)
 
     for result in results:
         news = News(
