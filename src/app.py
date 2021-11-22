@@ -3,8 +3,10 @@ import dotenv
 
 from flask import Flask, request, render_template
 
-from utils.scraper import CryptoScraper
 from utils.summarizer import Summarizer
+
+from utils.scrapers.crypto_scraper import CryptoScraper
+from utils.scrapers.article_scraper import ArticleScraper
 
 from utils.database import db
 
@@ -23,7 +25,7 @@ db.init_app(app)
 
 async def scrap(query):
     scraper = CryptoScraper()
-    results = await scraper.scrap(query)
+    results = await scraper.scrap(crypto_name = query)
 
     for result in results:
         news = News(
@@ -37,8 +39,17 @@ async def scrap(query):
     return results
 
 async def summary(title, url):
+    scraper = ArticleScraper()
+    article = await scraper.scrap(article_url = url)
     
-    pass
+    summary = Summarizer(article).summarize()
+
+    print(summary)
+
+    return {
+        'title': title,
+        'summary': summary
+    }
 
 @app.route('/coin', methods=['GET'])
 async def search():
@@ -50,11 +61,11 @@ async def search():
     
     data = await scrap(query)
 
-    if s_index:
+    if int(s_index):
         news = data[s_index]
 
         if news:
-            title = news['title']
+            title = news['heading']
             url   = news['url']
 
             s = await summary(title, url)

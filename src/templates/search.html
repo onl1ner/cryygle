@@ -52,15 +52,19 @@
             </div>
         {% endif %}
 
-        <div class="modal">
-            <div class="modal__content">
-                <h1>Modal</h1>
-        
-                <span>
-                    Test
-                </span>
+        {% if summary is not none %}
+            <div class="modal">
+                <div class="modal__content">
+                    <h1>
+                        {{ summary['title'] }}
+                    </h1>
+                    
+                    <span> 
+                        {{ summary['summary'] }}
+                    </span>
+                </div>
             </div>
-        </div>
+        {% endif %}
     </div>
 </body>
 

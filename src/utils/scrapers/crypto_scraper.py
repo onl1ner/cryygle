@@ -1,15 +1,11 @@
 from bs4 import BeautifulSoup
-from .extracter import HTMLExtracter
 
-class CryptoScraper:
+from utils.scrapers.scraper import Scraper
+
+class CryptoScraper(Scraper):
     def __init__(self):
         self.base_url = 'https://www.coingecko.com/en/coins/%s/news'
-
-    async def __extract_html(self, crypto_name):
-        url = self.base_url % crypto_name.lower()
-        extracter = HTMLExtracter(url)
-
-        return await extracter.extract()
+        super().__init__()
 
     def __scrap_urls(self, div):
         headers = div.find_all('header')
@@ -23,8 +19,14 @@ class CryptoScraper:
         paragraphs = div.find_all('div', {'class': 'post-body'})
         return [paragraph.text for paragraph in paragraphs]
 
-    async def scrap(self, crypto_name):
-        html = await self.__extract_html(crypto_name)
+    async def scrap(self, **kwargs):
+        if not 'crypto_name' in kwargs: return []
+
+        crypto_name = kwargs.get('crypto_name')
+
+        url  = self.base_url % crypto_name.lower()
+        html = await super()._extract_html(url)
+        
         soup = BeautifulSoup(html, 'html.parser')
 
         raw_news = soup.find('div', {'id': 'news'})
