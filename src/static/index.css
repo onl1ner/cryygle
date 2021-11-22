@@ -46,12 +46,32 @@ div.result {
 a.header {
 	font-size: 20px;
 	font-weight: bold;
-	color: #007AFF;
+	color: #007aff;
 	margin-bottom: 4px;
 	flex: 1;
 	align-self: flex-start;
 	margin-right: 16px;
 	text-decoration: none;
+}
+
+.wrapper {
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: -webkit-linear-gradient(to right, #834d9b, #d04ed6);
+	background: linear-gradient(to right, #834d9b, #d04ed6);
+}
+
+.wrapper a {
+	display: inline-block;
+	text-decoration: none;
+	padding: 15px;
+	background-color: #fff;
+	border-radius: 3px;
+	text-transform: uppercase;
+	color: #585858;
+	font-family: "Roboto", sans-serif;
 }
 
 .modal {
@@ -79,13 +99,8 @@ a.header {
 	position: relative;
 	width: 500px;
 	max-width: 90%;
-	background: #ffffff;
+	background: #fff;
 	padding: 1em 2em;
-}
-
-.modal__footer {
-	text-align: right;
-	color: #888a96;
 }
 
 .modal__close {

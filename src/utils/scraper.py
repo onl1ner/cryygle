@@ -7,7 +7,7 @@ class CryptoScraper:
 
     async def __extract_html(self, crypto_name):
         url = self.base_url % crypto_name.lower()
-        extracter = HTMLExtracter(url, params={})
+        extracter = HTMLExtracter(url)
 
         return await extracter.extract()
 
@@ -32,20 +32,20 @@ class CryptoScraper:
         if not raw_news:
             return []
         
-        urls = self.__scrap_urls(raw_news)
-        headings = self.__scrap_headings(raw_news)
+        urls       = self.__scrap_urls(raw_news)
+        headings   = self.__scrap_headings(raw_news)
         paragraphs = self.__scrap_paragraphs(raw_news)
 
         scrapped_news = []
 
         for index in range(10):
-            url = urls[index]
-            heading = headings[index]
+            url       = urls[index]
+            heading   = headings[index]
             paragraph = paragraphs[index]
 
             scrapped_news.append({
-                'url': url,
-                'heading': heading,
+                'url':       url,
+                'heading':   heading,
                 'paragraph': paragraph
             })
 

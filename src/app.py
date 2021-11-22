@@ -4,8 +4,9 @@ import dotenv
 from flask import Flask, request, render_template
 
 from utils.scraper import CryptoScraper
-from utils.database import db
 from utils.summarizer import Summarizer
+
+from utils.database import db
 
 from models.news import News
 
@@ -26,23 +27,46 @@ async def scrap(query):
 
     for result in results:
         news = News(
-            url=result['url'],
-            heading=result['heading'],
-            paragraph=result['paragraph']
+            url       = result['url'],
+            heading   = result['heading'],
+            paragraph = result['paragraph']
         )
         
         news.sync()
     
     return results
 
+async def summary(title, url):
+    
+    pass
+
 @app.route('/coin', methods=['GET'])
 async def search():
-    query = request.args.get('q')
+    query   = request.args.get('q')
+    s_index = request.args.get('s')
     
-    if not query:
+    if not query and not s_index:
         return render_template('search.html')
     
-    return render_template('search.html', query=query, data=await scrap(query))
+    data = await scrap(query)
+
+    if s_index:
+        news = data[s_index]
+
+        if news:
+            title = news['title']
+            url   = news['url']
+
+            s = await summary(title, url)
+
+            return render_template(
+                'search.html',
+                query   = query,
+                data    = data,
+                summary = s
+            )
+
+    return render_template('search.html', query = query, data = data)
 
 if __name__ == "__main__":
     app.run(debug=True)
