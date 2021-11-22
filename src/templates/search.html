@@ -28,9 +28,9 @@
                             </div>
                         </a>
 
-                        <button class="summary">
+                        <a class="summary" href="/coin?q={{ query }}&s={{ data.index(item) }}">
                             <img style="vertical-align: sub;" src="/static/img/info.svg" alt="summary">
-                        </button>
+                        </a>
                     </div>
                     <div>
                         <span>
@@ -51,21 +51,21 @@
                 </div>
             </div>
         {% endif %}
-
-        {% if summary is not none %}
-            <div class="modal">
-                <div class="modal__content">
-                    <h1>
-                        {{ summary['title'] }}
-                    </h1>
-                    
-                    <span> 
-                        {{ summary['summary'] }}
-                    </span>
-                </div>
-            </div>
-        {% endif %}
     </div>
+
+    {% if summary is defined %}
+        <div class="modal" onclick="location.href='/coin?q={{ query }}'">
+            <div class="modal__content">
+                <h2 style="margin: 0px 0px 8px 0px">
+                    {{ summary['title'] }}
+                </h2>
+
+                <span style="margin: 0px"> 
+                    {{ summary['summary'] }}
+                </span>
+            </div>
+        </div>
+    {% endif %}
 </body>
 
 </html>

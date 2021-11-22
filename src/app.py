@@ -44,8 +44,6 @@ async def summary(title, url):
     
     summary = Summarizer(article).summarize()
 
-    print(summary)
-
     return {
         'title': title,
         'summary': summary
@@ -61,8 +59,8 @@ async def search():
     
     data = await scrap(query)
 
-    if int(s_index):
-        news = data[s_index]
+    if s_index:
+        news = data[int(s_index)]
 
         if news:
             title = news['heading']
