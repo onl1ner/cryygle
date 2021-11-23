@@ -7,13 +7,17 @@
 </head>
 
 <body>
-    <div style="display: flex;flex-direction: column;align-items: center;vertical-align:middle;padding-bottom: 32px;">
+    <div class="container">
         <img src="/static/img/logo.svg" alt="logo" style="padding-top: 32px;padding-bottom: 16px;margin-bottom: 16px;">
 
         <div class="profile_card">
             <p class="profile_label">Login: {{ login }}</p>
             <p class="profile_label">Token: {{ token }}</p>
         </div>
+
+        <a href="/coin" style="width: 100%">
+            <p style="text-align: center;margin: 4px;">Back to Search</p>
+        </a>
     </div>
 </body>
 

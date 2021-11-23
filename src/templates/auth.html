@@ -7,23 +7,26 @@
 </head>
 
 <body>
-    <div style="display: flex;flex-direction: column;align-items: center;vertical-align:middle;padding-bottom: 32px;">
+    <div class="container">
         <img src="/static/img/logo.svg" alt="logo" style="padding-top: 32px;padding-bottom: 16px;margin-bottom: 16px;">
 
         <form action="" style="display: inline-block;vertical-align: middle;width: 400px" method="POST">
             <div>
-                <input class="basic_field" type="text" placeholder="Username" name="l">
+                <input class="basic_field" type="text" required="required" placeholder="Username" name="l">
             </div>
             <div>
-                <input class="basic_field" type="password" placeholder="Password" name="p">
+                <input class="basic_field" type="password" required="required" placeholder="Password" name="p">
             </div>
-            <button class="basic_button" type="submit">
+            <button class="basic_button" type="submit" style="margin-top: 16px;">
                 <p style="padding: 0px; margin: 0px">Submit</p>
             </button>
+            <a href="/coin" style="width: 100%">
+                <p style="text-align: center;margin: 4px;">Back to Search</p>
+            </a>
         </form>
 
         {% if error %}
-        <p class="error"><strong>Error:</strong> {{ error }}
+        <p class="error_label"><strong>Error:</strong> {{ error }}
         {% endif %}
     </div>
 </body>

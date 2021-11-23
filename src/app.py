@@ -64,7 +64,10 @@ def login():
 
         user_meta = Authorizer().auth(login, password)
 
-        return redirect(url_for('profile', token = user_meta['token']))
+        if user_meta:
+            return redirect(url_for('profile', token = user_meta['token']))
+        
+        return render_template('auth.html', error = "An error occured while trying to authorize")
 
     return render_template('auth.html')
 

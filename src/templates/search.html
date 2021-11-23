@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div style="display: flex;flex-direction: column;align-items: center;padding-bottom: 32px;">
+    <div class="container">
         <img src="/static/img/logo.svg" alt="logo" style="padding-top: 32px;padding-bottom: 16px;margin-bottom: 16px;">
 
         <form method="GET" style="display: flex;flex-direction: row;justify-content: center;align-items: center;width: 800px;margin-bottom: 16px">
@@ -41,16 +41,18 @@
                 </div>
             {% endfor %}
         {% else %}
+            {% if query|length %}
             <div class="result">
-                <h3 style="display: inline-block;line-height: 1.3;margin-bottom: 4px;">
+                <h3 style="display: inline-block;line-height: 1.3;margin-bottom: 8px;">
                     Nothing found! :(
                 </h3>
                 <div>
                     <span>
-                        Your search – {{ query }} – did not match with any cryptocurrency name.
+                        Your search did not match with any cryptocurrency name.
                     </span>
                 </div>
             </div>
+            {% endif %}
         {% endif %}
     </div>
 
