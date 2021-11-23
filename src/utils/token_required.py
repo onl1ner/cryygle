@@ -1,9 +1,12 @@
 import jwt
+
+from functools import wraps
 from flask import request, current_app
 
 from models.user import User
 
 def token_required(func):
+    @wraps(func)
     def decorated(*args, **kwargs):
         token = request.args.get('token')
         
@@ -16,6 +19,6 @@ def token_required(func):
         except:
             return '<h1>Wrong credentials</h1>'
         
-        return func(current_user, *args, **kwargs)
+        return func(current_user, token, *args, **kwargs)
   
     return decorated

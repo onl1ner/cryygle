@@ -1,10 +1,13 @@
 import os
 import dotenv
 
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect
+from flask.helpers import url_for
 
 from utils.authorizer import Authorizer
 from utils.summarizer import Summarizer
+
+from utils.token_required import token_required
 
 from utils.scrapers.crypto_scraper import CryptoScraper
 from utils.scrapers.article_scraper import ArticleScraper
@@ -61,9 +64,14 @@ def login():
 
         user_meta = Authorizer().auth(login, password)
 
-        return render_template('profile.html', login = login, token = user_meta['token'])
+        return redirect(url_for('profile', token = user_meta['token']))
 
     return render_template('auth.html')
+
+@app.route('/profile')
+@token_required
+def profile(user, token):
+    return render_template('profile.html', login = user.login, token = token)
 
 @app.route('/coin', methods=['GET'])
 async def search():
