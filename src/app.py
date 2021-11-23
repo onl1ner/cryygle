@@ -3,6 +3,7 @@ import dotenv
 
 from flask import Flask, request, render_template
 
+from utils.authorizer import Authorizer
 from utils.summarizer import Summarizer
 
 from utils.scrapers.crypto_scraper import CryptoScraper
@@ -49,12 +50,20 @@ async def summary(title, url):
         'summary': summary
     }
 
+def auth(login, password):
+    return Authorizer().auth(login, password)
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        pass
+        login    = request.form['l']
+        password = request.form['p']
 
-    return render_template('login.html')
+        user_meta = Authorizer().auth(login, password)
+
+        return render_template('profile.html', login = login, token = user_meta['token'])
+
+    return render_template('auth.html')
 
 @app.route('/coin', methods=['GET'])
 async def search():
