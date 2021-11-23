@@ -1,0 +1,33 @@
+<html>
+
+<head>
+    <title>Cryygle Auth</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' type='text/css'>
+    <link rel="stylesheet" href="/static/index.css">
+</head>
+
+<body>
+    <div style="display: flex;flex-direction: column;align-items: center;vertical-align:middle;padding-bottom: 32px;">
+        <img src="/static/img/logo.svg" alt="logo" style="padding-top: 32px;padding-bottom: 16px;margin-bottom: 16px;">
+
+        <form action="" style="display: inline-block;vertical-align: middle;width: 400px" method="POST">
+            <div>
+                <input class="basic_field" type="text" placeholder="Username" name="username" value="{{
+              request.form.username }}">
+            </div>
+            <div>
+                <input class="basic_field" type="password" placeholder="Password" name="password" value="{{
+              request.form.password }}">
+            </div>
+            <button class="basic_button" type="submit">
+                <p style="padding: 0px; margin: 0px">Submit</p>
+            </button>
+        </form>
+
+        {% if error %}
+        <p class="error"><strong>Error:</strong> {{ error }}
+        {% endif %}
+    </div>
+</body>
+
+</html>

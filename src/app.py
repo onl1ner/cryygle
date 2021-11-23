@@ -49,6 +49,13 @@ async def summary(title, url):
         'summary': summary
     }
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        pass
+
+    return render_template('login.html')
+
 @app.route('/coin', methods=['GET'])
 async def search():
     query   = request.args.get('q')

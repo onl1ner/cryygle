@@ -10,6 +10,35 @@ input.search[type="text"] {
 	margin-right: 16px;
 }
 
+input.basic_field {
+	padding: 8px;
+	width: 100%;
+	font-size: 16px;
+	font-family: "Source Sans Pro", sans-serif;
+	background: #f2f2f7;
+	border-radius: 4px;
+	border-width: 0px;
+	display: inline;
+}
+
+button.basic_button {
+	padding: 8px;
+	width: 100%;
+	font-size: 16px;
+	font-family: "Source Sans Pro", sans-serif;
+	padding: 8px;
+	background: #4285f4;
+	color: #fff;
+	cursor: pointer;
+	margin-top: 16px;
+	border-radius: 4px;
+	border-width: 0px;
+}
+
+button.basic_button:hover {
+	background: #609cff;
+}
+
 button.search[type="submit"] {
 	float: left;
 	width: 100px;
